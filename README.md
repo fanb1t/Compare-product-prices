@@ -19,3 +19,5 @@ To run this Flutter app on your local machine:
    ```bash
    git clone https://github.com/fanb1t/Compare-product-prices.git
    cd Compare-product-prices
+
+สิ้งที่จะทำเป็นแอพที่สามารถ เปรียบเทียบราคาสินค้า แต่ละอันได้ เช่นจะเปรียบเทียบ1กล่องกับแพ็ค
