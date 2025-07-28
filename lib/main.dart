@@ -10,11 +10,24 @@ class MainApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return const MaterialApp(
-      home: Scaffold(
-        body: Center(
-          child: Text('Hello World!'),
-        ),
-      ),
+      home: compare_pd
     );
+  }
+}
+// เริ่มระบบ Widget ระบบwidgetหลัก โดยเราจะเขียนแยกคลาสเป็น ส่วนของ state คลาสของฟอร์ม คลาสของการแจ้งเตือน
+
+class compare_pd extends StatefulWidget { 
+  const compare_pd({super.key});
+
+  @override
+  State<compare_pd> createState() => _compare_pdState();
+  
+}
+
+// สร้างคลาสหลักของ widget เป็นclass รับค่าstateก่อน
+class _compare_pdState extends State<compare_pd> {
+  @override
+  Widget build(BuildContext context) {
+    return const Placeholder();
   }
 }
