@@ -19,14 +19,7 @@ class MainApp extends StatelessWidget {
           ),
         ),
       ),
-      home: const Scaffold(
-        appBar: AppBar(
-          title: Text('Hello World!'),
-        ),
-        body: Center(
-          child: Text('Welcome!'),
-        ),
-      ),
+      
     );
   }
 }
