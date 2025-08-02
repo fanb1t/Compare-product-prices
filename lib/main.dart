@@ -10,7 +10,7 @@ class MainApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'เปรียบเทียบราคาสินค้า',
+      title: 'Unit Price Comparison App',
       theme: AppTheme.darkTheme,
       home: const CompareBody(),
     );
@@ -19,6 +19,11 @@ class MainApp extends StatelessWidget {
 
 // คลาสจัดการธีมสีและสไตล์ทั้งหมด
 class AppTheme {
+  // สีของการ์ดแต่ละแบบ
+  static const Color cardColor1 = Color(0xFFE91E63); // สีชมพูสำหรับการ์ดที่ 1
+  static const Color cardColor2 = Color(0xFF9C27B0); // สีม่วงสำหรับการ์ดที่ 2
+  static const Color cardBackgroundDark = Color(0xFF1B263B); // พื้นหลังการ์ดสีมืด
+  
   static final ThemeData darkTheme = ThemeData(
     brightness: Brightness.dark,
     scaffoldBackgroundColor: const Color(0xFF0D1B2A), // สีเข้มหลัก
@@ -28,15 +33,9 @@ class AppTheme {
       surface: Color(0xFF1B263B), // สีพื้นผิว
       background: Color(0xFF0D1B2A), // สีพื้นหลัง
     ),
-    appBarTheme: const AppBarTheme(
-      backgroundColor: Colors.transparent,
-      elevation: 0,
-      foregroundColor: Colors.white, // สีขาวสำหรับหัวข้อ
-      centerTitle: true,
-    ),
     inputDecorationTheme: InputDecorationTheme(
       filled: true,
-      fillColor: const Color(0xFF1B263B).withOpacity(0.7),
+      fillColor: cardBackgroundDark.withOpacity(0.7),
       border: OutlineInputBorder(
         borderRadius: BorderRadius.circular(15),
         borderSide: BorderSide.none,
@@ -269,29 +268,6 @@ class _CompareBodyState extends State<CompareBody> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      // AppBar พร้อมเอฟเฟคเบลอและไล่สี
-      appBar: AppBar(
-        title: const Text(
-          '🛒 เปรียบเทียบราคาสินค้า',
-          style: TextStyle(
-            color: Colors.white,
-            fontWeight: FontWeight.bold,
-            fontSize: 22,
-          ),
-        ),
-        flexibleSpace: Container(
-          decoration: BoxDecoration(
-            gradient: LinearGradient(
-              colors: [
-                const Color(0xFFE91E63).withOpacity(0.8), // สีชมพูโปร่งใส
-                const Color(0xFF9C27B0).withOpacity(0.6), // สีม่วงโปร่งใส
-              ],
-              begin: Alignment.topLeft,
-              end: Alignment.bottomRight,
-            ),
-          ),
-        ),
-      ),
       
       // Body หลักของแอป
       body: Container(
@@ -308,12 +284,22 @@ class _CompareBodyState extends State<CompareBody> {
           ),
         ),
         child: SingleChildScrollView(
-          padding: const EdgeInsets.all(20),
+          padding: const EdgeInsets.fromLTRB(20, 60, 20, 20), // เพิ่ม padding ด้านบนแทน AppBar
           child: Column(
             children: [
+              // หัวข้อแอป
+              const Text(
+                '🪙 Unit Price Comparison',
+                style: TextStyle(
+                  color: Colors.white,
+                  fontWeight: FontWeight.bold,
+                  fontSize: 28,
+                ),
+              ),
+              const SizedBox(height: 30),
               // การ์ดสินค้าแรก
               _buildProductCard(
-                title: '🥤 สินค้าที่ 1',
+                title: 'Product 1',
                 nameController: _product1NameController,
                 volumeController: _product1VolumeController,
                 priceController: _product1PriceController,
@@ -324,33 +310,40 @@ class _CompareBodyState extends State<CompareBody> {
               
               const SizedBox(height: 20),
               
-              // ไอคอน VS กลางๆ
-              Container(
-                padding: const EdgeInsets.all(15),
-                decoration: BoxDecoration(
-                  shape: BoxShape.circle,
-                  gradient: LinearGradient(
-                    colors: [
-                      const Color(0xFFFF6B6B).withOpacity(0.8),
-                      const Color(0xFFE91E63).withOpacity(0.8),
+              // เส้นแบ่งสวยงามแทน VS
+              Column(
+                children: [
+                  Row(
+                    children: [
+                      Expanded(child: Divider(color: const Color(0xFFE91E63).withOpacity(0.6), thickness: 2)),
+                      Container(
+                        margin: const EdgeInsets.symmetric(horizontal: 15),
+                        padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 8),
+                        decoration: BoxDecoration(
+                          color: const Color(0xFF1B263B),
+                          borderRadius: BorderRadius.circular(20),
+                          border: Border.all(color: const Color(0xFFE91E63).withOpacity(0.5), width: 1.5),
+                        ),
+                        child: const Text(
+                          'Product Price Comparator 🔄 ',
+                          style: TextStyle(
+                            color: Colors.white,
+                            fontWeight: FontWeight.bold,
+                            fontSize: 16,
+                          ),
+                        ),
+                      ),
+                      Expanded(child: Divider(color: const Color(0xFFE91E63).withOpacity(0.6), thickness: 2)),
                     ],
                   ),
-                ),
-                child: const Text(
-                  '⚡ VS ⚡',
-                  style: TextStyle(
-                    fontSize: 24,
-                    fontWeight: FontWeight.bold,
-                    color: Colors.white,
-                  ),
-                ),
+                ],
               ),
               
               const SizedBox(height: 20),
               
               // การ์ดสินค้าที่สอง
               _buildProductCard(
-                title: '🛍️ สินค้าที่ 2',
+                title: 'Product 2',
                 nameController: _product2NameController,
                 volumeController: _product2VolumeController,
                 priceController: _product2PriceController,
@@ -367,9 +360,8 @@ class _CompareBodyState extends State<CompareBody> {
                   Expanded(
                     child: ElevatedButton.icon(
                       onPressed: _compareProducts,
-                      icon: const Text('🔍', style: TextStyle(fontSize: 20)),
                       label: const Text(
-                        'เปรียบเทียบราคา',
+                        'Compare Products',
                         style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
                       ),
                     ),
@@ -381,7 +373,7 @@ class _CompareBodyState extends State<CompareBody> {
                       backgroundColor: const Color(0xFF6C5CE7),
                       padding: const EdgeInsets.all(15),
                     ),
-                    child: const Text('🗑️', style: TextStyle(fontSize: 20)),
+                    child: const Text('Clear', style: TextStyle(fontSize: 20)),
                   ),
                 ],
               ),
@@ -397,7 +389,7 @@ class _CompareBodyState extends State<CompareBody> {
     );
   }
 
-  // Widget การ์ดสำหรับกรอกข้อมูลสินค้า
+  // Widget การ์ดสำหรับกรอกข้อมูลสินค้า - โทนมืดเรียบ
   Widget _buildProductCard({
     required String title,
     required TextEditingController nameController,
@@ -410,19 +402,12 @@ class _CompareBodyState extends State<CompareBody> {
     return Container(
       padding: const EdgeInsets.all(20),
       decoration: BoxDecoration(
-        color: cardColor,
+        color: const Color(0xFF1B263B), // สีมืดเรียบไม่มีเบลอ
         borderRadius: BorderRadius.circular(20),
         border: Border.all(
-          color: const Color(0xFFE91E63).withOpacity(0.3),
-          width: 2,
+          color: const Color(0xFF415A77).withOpacity(0.5), // เส้นขอบโทนมืด
+          width: 1,
         ),
-        boxShadow: [
-          BoxShadow(
-            color: const Color(0xFFE91E63).withOpacity(0.2),
-            blurRadius: 15,
-            offset: const Offset(0, 5),
-          ),
-        ],
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -567,7 +552,7 @@ class _CompareBodyState extends State<CompareBody> {
                   children: [
                     Column(
                       children: [
-                        const Text('🥤 สินค้าที่ 1', style: TextStyle(color: Colors.white70)),
+                        const Text('Product 1', style: TextStyle(color: Colors.white70)),
                         Text(
                           '฿${_comparisonResult!.product1PricePer100ML.toStringAsFixed(2)}',
                           style: const TextStyle(
@@ -580,7 +565,7 @@ class _CompareBodyState extends State<CompareBody> {
                     ),
                     Column(
                       children: [
-                        const Text('🛍️ สินค้าที่ 2', style: TextStyle(color: Colors.white70)),
+                        const Text('Product 2', style: TextStyle(color: Colors.white70)),
                         Text(
                           '฿${_comparisonResult!.product2PricePer100ML.toStringAsFixed(2)}',
                           style: const TextStyle(
