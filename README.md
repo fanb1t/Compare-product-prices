@@ -26,7 +26,7 @@ Product Price Comparator เป็นแอปมือถือที่ช่�
 
 ## 📱 Demo Screenshots
 
-![Main Screen](picture/image.png "Main Screen") 
+
 ![Detail App](picture/detail.png "Detail App")  
 ![Comparison Result](picture/result.png "Comparison Result")  
 
