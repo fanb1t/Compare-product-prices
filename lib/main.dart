@@ -30,8 +30,8 @@ class AppTheme {
     colorScheme: const ColorScheme.dark(
       primary: Color(0xFFFF6B6B), // สีแดงส้มสำหรับปุ่ม
       secondary: Color(0xFFE91E63), // สีชมพู
-      surface: Color(0xFF1B263B), // สีพื้นผิว
-      background: Color(0xFF0D1B2A), // สีพื้นหลัง
+      surface: Color.fromARGB(255, 43, 33, 73), // สีพื้นผิว
+      background: Color.fromARGB(255, 19, 15, 78), // สีพื้นหลัง
     ),
     inputDecorationTheme: InputDecorationTheme(
       filled: true,
@@ -373,7 +373,9 @@ class _CompareBodyState extends State<CompareBody> {
                       backgroundColor: const Color(0xFF6C5CE7),
                       padding: const EdgeInsets.all(15),
                     ),
-                    child: const Text('Clear', style: TextStyle(fontSize: 20)),
+                    child: 
+                    const Icon
+                    (Icons.clear, size: 24),
                   ),
                 ],
               ),
