@@ -1,0 +1,117 @@
+Widget Tree Structure for Unit Price Comparison App
+==================================================
+
+MainApp (StatelessWidget)
+└── MaterialApp
+    └── CompareBody (StatefulWidget)
+        └── _CompareBodyState
+            └── Scaffold
+                └── Container (with gradient background)
+                    └── SingleChildScrollView
+                        └── Column
+                            ├── Text ('🪙 Unit Price Comparison')
+                            ├── SizedBox (height: 30)
+                            ├── _buildProductCard() for Product 1
+                            │   └── Container
+                            │       └── Column
+                            │           ├── Text (title: 'Product 1')
+                            │           ├── SizedBox (height: 15)
+                            │           ├── TextField (name input)
+                            │           ├── SizedBox (height: 15)
+                            │           ├── Row
+                            │           │   ├── Expanded
+                            │           │   │   └── TextField (volume input)
+                            │           │   ├── SizedBox (width: 10)
+                            │           │   └── Expanded
+                            │           │       └── DropdownButtonFormField (unit selection)
+                            │           └── SizedBox (height: 15)
+                            │           └── TextField (price input)
+                            │
+                            ├── SizedBox (height: 20)
+                            │
+                            ├── Column (VS divider)
+                            │   └── Row
+                            │       ├── Expanded
+                            │       │   └── Divider
+                            │       ├── Container (VS text)
+                            │       │   └── Text ('Product Price Comparator 🔄')
+                            │       └── Expanded
+                            │           └── Divider
+                            │
+                            ├── SizedBox (height: 20)
+                            │
+                            ├── _buildProductCard() for Product 2
+                            │   └── Container
+                            │       └── Column
+                            │           ├── Text (title: 'Product 2')
+                            │           ├── SizedBox (height: 15)
+                            │           ├── TextField (name input)
+                            │           ├── SizedBox (height: 15)
+                            │           ├── Row
+                            │           │   ├── Expanded
+                            │           │   │   └── TextField (volume input)
+                            │           │   ├── SizedBox (width: 10)
+                            │           │   └── Expanded
+                            │           │       └── DropdownButtonFormField (unit selection)
+                            │           └── SizedBox (height: 15)
+                            │           └── TextField (price input)
+                            │
+                            ├── SizedBox (height: 30)
+                            │
+                            ├── Row (buttons)
+                            │   ├── Expanded
+                            │   │   └── ElevatedButton.icon (Compare Products)
+                            │   ├── SizedBox (width: 15)
+                            │   └── ElevatedButton (Clear button)
+                            │       └── Icon (clear icon)
+                            │
+                            ├── SizedBox (height: 30)
+                            │
+                            └── _buildResultCard() (conditional - only shown when _comparisonResult != null)
+                                └── Container
+                                    └── Column
+                                        ├── Text (result title with emoji)
+                                        ├── SizedBox (height: 20)
+                                        ├── Container (price comparison)
+                                        │   └── Column
+                                        │       ├── Text ('💵 ราคาต่อ 100 มล./กรัม')
+                                        │       ├── SizedBox (height: 10)
+                                        │       └── Row
+                                        │           ├── Column (Product 1 price)
+                                        │           │   ├── Text ('Product 1')
+                                        │           │   └── Text (price value)
+                                        │           └── Column (Product 2 price)
+                                        │               ├── Text ('Product 2')
+                                        │               └── Text (price value)
+                                        ├── SizedBox (height: 20)
+                                        └── Container (main result)
+                                            └── Column
+                                                ├── Text ('🏆 สินค้าที่คุ้มค่าที่สุด')
+                                                ├── SizedBox (height: 10)
+                                                ├── Text (better choice)
+                                                └── Text (savings amount) - conditional
+
+Key Components:
+==============
+
+1. **MainApp**: Root widget that sets up MaterialApp with dark theme
+2. **CompareBody**: Main stateful widget managing the entire UI
+3. **Product Cards**: Two identical card structures for product input
+4. **VS Divider**: Decorative divider between product cards
+5. **Action Buttons**: Compare and Clear buttons
+6. **Result Card**: Conditional widget showing comparison results
+
+State Management:
+================
+- TextEditingController for each input field (6 total)
+- String variables for unit selection (2 total)
+- ComparisonResult? for storing comparison results
+- List<String> for available units
+
+Theme Configuration:
+==================
+- Dark theme with custom colors
+- Gradient backgrounds
+- Custom input decoration
+- Elevated button styling
+- Card styling with borders and shadows
